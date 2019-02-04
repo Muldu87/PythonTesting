@@ -3,10 +3,8 @@ import numbers
 import re
 
 
-
-
 def Convert(input):
-    # find the romertal.
+    # find the romen number.
     if isinstance(input, numbers.Number):
         if input > 5999:
             print("Max number exceeded. Please go no further than 5999.")
@@ -22,7 +20,6 @@ def Convert(input):
             print('invalid input')
     else:
         print("invalid value")
-
 
 
 def GetRomertal(input):
@@ -43,7 +40,7 @@ def GetRomertal(input):
     if input > 89:
         result += 'XC'
         input -= 90
-    if input > 39 and input < 50:
+    if 39 < input < 50:
         result += 'XL'
         input -= 40
     else:
@@ -55,55 +52,54 @@ def GetRomertal(input):
     if input == 9:
         result += 'IX'
         input -= 9
-    if input > 5 and input < 9:
+    if 5 < input < 9:
         calc = (input - 5) // 1 * 'I'
         num = 'V'
         result += ("%s%s" % (num, calc))
     if input == 4:
         result += 'IV'
-    if input >= 0 and input <= 3:
+    if 0 <= input <= 3:
         result += (input // 1) * 'I'
         input -= (input // 1)
-
 
     return result
 
 
-
 def GetNumberFromRomanNumber(input):
-    previousValue = ''
+    pv = ''
     result = 0
     for c in input:
-        if c == 'M' and previousValue != 'C':
+        if c == 'M' and pv != 'C':
             result += 1000
-        elif c == 'M' and previousValue == 'C':
+        elif c == 'M' and pv == 'C':
             result += 800
-        elif c == 'D' and previousValue != 'C':
+        elif c == 'D' and pv != 'C':
             result += 500
-        elif c == 'D' and previousValue == 'C':
+        elif c == 'D' and pv == 'C':
             result += 300
-        elif c == 'C'  and previousValue != 'X':
+        elif c == 'C' and pv != 'X':
             result += 100
-        elif c == 'C' and previousValue == 'X':
+        elif c == 'C' and pv == 'X':
             result += 80
-        elif c == 'L' and previousValue != 'X':
+        elif c == 'L' and pv != 'X':
             result += 50
-        elif c == 'L' and previousValue == 'X':
+        elif c == 'L' and pv == 'X':
             result += 30
-        elif c == 'X' and previousValue != 'I':
+        elif c == 'X' and pv != 'I':
             result += 10
-        elif c == 'X' and previousValue == 'I':
+        elif c == 'X' and pv == 'I':
             result += 8
-        elif c == 'V' and previousValue != 'I':
+        elif c == 'V' and pv != 'I':
             result += 5
-        elif c == 'V' and previousValue == 'I':
+        elif c == 'V' and pv == 'I':
             result += 3
         elif c == 'I':
             result += 1
 
-        previousValue = c
+        pv = c
 
     return result
+
 
 Convert("XXX")
 
