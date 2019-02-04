@@ -28,19 +28,19 @@ def Convert(input):
 def GetRomertal(input):
     result = (input // 1000) * 'M'
     input -= ((input // 1000) * 1000)
-    if input > 899 and input < 1000:
+    if input > 899:
         result += 'CM'
         input -= 900
     else:
         result += (input // 500) * 'D'
         input -= ((input // 500) * 500)
-    if input > 399 and input < 500:
+    if input > 399:
         result += 'CD'
         input -= 400
     else:
         result += (input // 100) * 'C'
-        input -=  ((input // 100) * 100)
-    if input > 89 and input < 99:
+        input -= ((input // 100) * 100)
+    if input > 89:
         result += 'XC'
         input -= 90
     if input > 39 and input < 50:
@@ -106,3 +106,5 @@ def GetNumberFromRomanNumber(input):
     return result
 
 Convert("XXX")
+
+Convert(1956)
