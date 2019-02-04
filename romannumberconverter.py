@@ -1,5 +1,6 @@
 import sys
 import numbers
+import re
 
 
 
@@ -13,8 +14,12 @@ def Convert(input):
             result = GetRomertal(input)
             print(result)
     elif input.isalpha():
-        result = GetNumberFromRomanNumber(input)
-        print("%s is %d!" % (input,result))
+        m = re.compile('^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$')
+        if m.match(input):
+            result = GetNumberFromRomanNumber(input)
+            print("%s is %d!" % (input, result))
+        else:
+            print('invalid input')
     else:
         print("invalid value")
 
@@ -100,4 +105,4 @@ def GetNumberFromRomanNumber(input):
 
     return result
 
-Convert("XXXIIXX")
+Convert("XXX")
