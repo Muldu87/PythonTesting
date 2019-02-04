@@ -45,7 +45,7 @@ def GetRomertal(input):
         input -= 40
     else:
         result += (input // 50) * 'L'
-        input = input - ((input // 50) * 50)
+        input -= ((input // 50) * 50)
     if input >= 10 or input <= 30:
         result += (input // 10) * 'X'
         input -= ((input // 10) * 10)
