@@ -6,7 +6,7 @@ import re
 def Convert(input):
     # find the romen number.
     if isinstance(input, numbers.Number):
-        if input > 5999:
+        if input > 4999:
             print("Max number exceeded. Please go no further than 5999.")
         else:
             result = GetRomertal(input)
