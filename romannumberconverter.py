@@ -46,7 +46,7 @@ def GetRomertal(input):
     else:
         result += (input // 50) * 'L'
         input -= ((input // 50) * 50)
-    if input >= 10 or input <= 30:
+    if 9 < input < 30:
         result += (input // 10) * 'X'
         input -= ((input // 10) * 10)
     if input == 9:
@@ -101,6 +101,6 @@ def GetNumberFromRomanNumber(input):
     return result
 
 
-Convert("MCMLVI")
+Convert("XX")
 
-Convert(1956)
+Convert(20)
