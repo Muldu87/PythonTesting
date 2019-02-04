@@ -13,9 +13,8 @@ def Convert(input):
             result = GetRomertal(input)
             print(result)
     elif input.isalpha():
-        if input == "X":
-            result = 10
-            print("%s is %d!" % (input,result))
+        result = GetNumberFromRomanNumber(input)
+        print("%s is %d!" % (input,result))
     else:
         print("invalid value")
 
@@ -64,4 +63,41 @@ def GetRomertal(input):
 
     return result
 
-Convert(1939)
+
+
+def GetNumberFromRomanNumber(input):
+    previousValue = ''
+    result = 0
+    for c in input:
+        if c == 'M' and previousValue != 'C':
+            result += 1000
+        elif c == 'M' and previousValue == 'C':
+            result += 800
+        elif c == 'D' and previousValue != 'C':
+            result += 500
+        elif c == 'D' and previousValue == 'C':
+            result += 300
+        elif c == 'C'  and previousValue != 'X':
+            result += 100
+        elif c == 'C' and previousValue == 'X':
+            result += 80
+        elif c == 'L' and previousValue != 'X':
+            result += 50
+        elif c == 'L' and previousValue == 'X':
+            result += 30
+        elif c == 'X' and previousValue != 'I':
+            result += 10
+        elif c == 'X' and previousValue == 'I':
+            result += 8
+        elif c == 'V' and previousValue != 'I':
+            result += 5
+        elif c == 'V' and previousValue == 'I':
+            result += 3
+        elif c == 'I':
+            result += 1
+
+        previousValue = c
+
+    return result
+
+Convert("XXXIIXX")
