@@ -46,7 +46,7 @@ def GetRomertal(input):
     else:
         result += (input // 50) * 'L'
         input -= ((input // 50) * 50)
-    if 9 < input < 30:
+    if 9 < input < 40:
         result += (input // 10) * 'X'
         input -= ((input // 10) * 10)
     if input == 9:
@@ -103,4 +103,32 @@ def GetNumberFromRomanNumber(input):
 
 Convert("XX")
 
-Convert(20)
+Convert(1986)
+
+
+#test the number converter.
+def runtest():
+    m = re.compile('^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$')
+    found = False
+    for i in range(3999):
+        result = GetRomertal(i)
+        if not m.match(result):
+            print("%d input failed. Invalid result is: %s!" % (i, result))
+            found = True
+            break
+
+    if not found:
+        print('Test Passed')
+
+
+def runtest2():
+    if GetRomertal(50) == 'L':
+        print('test for 50 passed')
+    if GetRomertal(990) == 'CMXC':
+        print('test for 990 passed')
+    if GetRomertal(1986) == 'MCMLXXXVI':
+        print('test for 1986 passed')
+
+
+runtest()
+runtest2()
