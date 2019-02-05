@@ -3,72 +3,72 @@ import numbers
 import re
 
 
-def Convert(input):
+def convert(i):
     # find the romen number.
-    if isinstance(input, numbers.Number):
-        if input > 4999:
+    if isinstance(i, numbers.Number):
+        if i > 4999:
             print("Max number exceeded. Please go no further than 5999.")
         else:
-            result = GetRomertal(input)
-            print("%d is %s!" % (input, result))
-    elif input.isalpha():
+            result = getromernumber(i)
+            print("%d is %s!" % (i, result))
+    elif i.isalpha():
         m = re.compile('^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$')
-        if m.match(input):
-            result = GetNumberFromRomanNumber(input)
-            print("%s is %d!" % (input, result))
+        if m.match(i):
+            result = getnumberfromromannumber(i)
+            print("%s is %d!" % (i, result))
         else:
             print('invalid input')
     else:
         print("invalid value")
 
 
-def GetRomertal(input):
-    result = (input // 1000) * 'M'
-    input -= ((input // 1000) * 1000)
-    if input > 899:
+def getromernumber(i):
+    result = (i // 1000) * 'M'
+    i -= ((i // 1000) * 1000)
+    if i > 899:
         result += 'CM'
-        input -= 900
+        i -= 900
     else:
-        result += (input // 500) * 'D'
-        input -= ((input // 500) * 500)
-    if input > 399:
+        result += (i // 500) * 'D'
+        i -= ((i // 500) * 500)
+    if i > 399:
         result += 'CD'
-        input -= 400
+        i -= 400
     else:
-        result += (input // 100) * 'C'
-        input -= ((input // 100) * 100)
-    if input > 89:
+        result += (i // 100) * 'C'
+        i -= ((i // 100) * 100)
+    if i > 89:
         result += 'XC'
-        input -= 90
-    if 39 < input < 50:
+        i -= 90
+    if 39 < i < 50:
         result += 'XL'
-        input -= 40
+        i -= 40
     else:
-        result += (input // 50) * 'L'
-        input -= ((input // 50) * 50)
-    if 9 < input < 40:
-        result += (input // 10) * 'X'
-        input -= ((input // 10) * 10)
-    if input == 9:
+        result += (i // 50) * 'L'
+        i -= ((i // 50) * 50)
+    if 9 < i < 40:
+        result += (i // 10) * 'X'
+        i -= ((i // 10) * 10)
+    if i == 9:
         result += 'IX'
-        input -= 9
-    if 5 < input < 9:
-        calc = (input - 5) // 1 * 'I'
+        i -= 9
+    if 5 < i < 9:
+        calc = (i - 5) // 1 * 'I'
         num = 'V'
         result += ("%s%s" % (num, calc))
-    if input == 4:
+    if i == 4:
         result += 'IV'
-    if 0 <= input <= 3:
-        result += (input // 1) * 'I'
-        input -= (input // 1)
+    if 0 <= i <= 3:
+        result += (i // 1) * 'I'
+        i -= (i // 1)
 
     return result
 
 
-def GetNumberFromRomanNumber(input):
+def getnumberfromromannumber(i):
     pv = ''
     result = 0
-    for c in input:
+    for c in i:
         if c == 'M' and pv != 'C':
             result += 1000
         elif c == 'M' and pv == 'C':
@@ -101,9 +101,10 @@ def GetNumberFromRomanNumber(input):
     return result
 
 
-Convert("XX")
+convert("XX")
 
-Convert(1986)
+convert(20)
+
 
 
 #test the number converter.
@@ -111,7 +112,7 @@ def runtest():
     m = re.compile('^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$')
     found = False
     for i in range(3999):
-        result = GetRomertal(i)
+        result = getromernumber(i)
         if not m.match(result):
             print("%d input failed. Invalid result is: %s!" % (i, result))
             found = True
@@ -122,12 +123,14 @@ def runtest():
 
 
 def runtest2():
-    if GetRomertal(50) == 'L':
+    if getromernumber(50) == 'L':
         print('test for 50 passed')
-    if GetRomertal(990) == 'CMXC':
+    if getromernumber(990) == 'CMXC':
         print('test for 990 passed')
-    if GetRomertal(1986) == 'MCMLXXXVI':
+    if getromernumber(1986) == 'MCMLXXXVI':
         print('test for 1986 passed')
+    else:
+        print('test for 1986 failed')
 
 
 runtest()
