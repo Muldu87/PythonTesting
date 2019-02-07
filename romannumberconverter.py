@@ -6,8 +6,8 @@ import re
 def convert(i):
     # find the romen number.
     if isinstance(i, numbers.Number):
-        if i > 4999:
-            print("Max number exceeded. Please go no further than 5999.")
+        if not 0 < i < 4000:
+            print("Max or min number exceeded. Please go no further than 4000.")
         else:
             result = getromernumber(i)
             print("%d is %s!" % (i, result))
@@ -23,6 +23,7 @@ def convert(i):
 
 
 def getromernumber(i):
+
     result = (i // 1000) * 'M'
     i -= ((i // 1000) * 1000)
     if i > 899:
@@ -52,6 +53,9 @@ def getromernumber(i):
     if i == 9:
         result += 'IX'
         i -= 9
+    if i == 5:
+        result += 'V'
+        i -= 5
     if 5 < i < 9:
         calc = (i - 5) // 1 * 'I'
         num = 'V'
@@ -101,9 +105,9 @@ def getnumberfromromannumber(i):
     return result
 
 
-convert("XX")
+convert("V")
 
-convert(20)
+convert(5)
 
 
 
@@ -133,5 +137,31 @@ def runtest2():
         print('test for 1986 failed')
 
 
+
+
+def runtest3():
+    m = re.compile('^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$')
+    found = False
+    for i in range(3999):
+        result = getromernumber(i)
+        if m.match(result):
+            if i != getnumberfromromannumber(result):
+                print("%d input failed. Invalid result is: %s!" % (i, result))
+                found = True
+                break
+
+    if not found:
+        print('Test Passed')
+
+def runtest4():
+    if getnumberfromromannumber("V") != 5:
+        print('test failed for 5')
+
+
 runtest()
+
 runtest2()
+
+runtest3()
+
+runtest4()
