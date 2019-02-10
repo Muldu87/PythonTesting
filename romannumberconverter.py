@@ -1,4 +1,3 @@
-import sys
 import numbers
 import re
 
@@ -165,3 +164,4 @@ runtest2()
 runtest3()
 
 runtest4()
+
