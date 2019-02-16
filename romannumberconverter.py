@@ -108,6 +108,18 @@ convert("V")
 
 convert(5)
 
+def check_val(i):
+    try:
+        val = int(i)
+        return val
+    except:
+        return val
+
+
+i = input("Enter some number or romannumber: ")
+
+
+print(convert(check_val(i)))
 
 
 #test the number converter.
