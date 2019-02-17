@@ -110,8 +110,11 @@ convert(5)
 
 def check_val(i):
     try:
-        val = int(i)
-        return val
+        if i.isalpha():
+            return i
+        else:
+            val = int(i)
+            return val
     except:
         return val
 
